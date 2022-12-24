@@ -7,6 +7,9 @@
 #define VK_2 0x32
 #define VK_3 0x33
 
+#define ENABLED "\u001b[32mENABLED\u001b[0m"
+#define DISABLED "\u001b[31mDISABLED\u001b[0m"
+
 uintptr_t CalculateAddress(uintptr_t base, std::vector<uintptr_t> offsets)
 {
     /*
@@ -79,7 +82,7 @@ void RenderMenu(bool infiniteHealth, bool infiniteSuper, bool infiniteCoins)
 {
     system("cls");
 
-    printf("Cuphead Cheat\n\nInfinite Health: %s [1]\nInfinite Super:  %s [2]\nInfinite Coins:  %s [3]\n\n[END] to exit..\n", infiniteHealth ? "ENABLED" : "DISABLED", infiniteSuper ? "ENABLED" : "DISABLED", infiniteCoins ? "ENABLED" : "DISABLED");
+    printf("Cuphead Cheat\n\nInfinite Health: %s [1]\nInfinite Super:  %s [2]\nInfinite Coins:  %s [3]\n\n[END] to exit..\n", infiniteHealth ? ENABLED : DISABLED, infiniteSuper ? ENABLED : DISABLED, infiniteCoins ? ENABLED : DISABLED);
 }
 
 DWORD WINAPI CheatLoop(HMODULE hModule)
@@ -121,7 +124,7 @@ DWORD WINAPI CheatLoop(HMODULE hModule)
         }
 
         if (infiniteSuper) {
-            SetSuperMeter(50.0, localPlayerAddress);
+            SetSuperMeter(50, localPlayerAddress);
         }
 
         if (infiniteCoins) {
@@ -130,7 +133,7 @@ DWORD WINAPI CheatLoop(HMODULE hModule)
             SetCoinsForWorldC(60, modBase);
         }
 
-        Sleep(500);
+        Sleep(100);
     }
 
     fclose(f); FreeConsole();
